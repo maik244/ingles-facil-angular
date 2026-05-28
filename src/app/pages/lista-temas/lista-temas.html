@@ -41,41 +41,53 @@
     </p>
 
     <!-- TABLA -->
-    <table *ngIf="temaSeleccionado.tabla">
+@if (temaSeleccionado.tabla) {
 
-      <tr>
-        <th>Pronombre</th>
-        <th>Verbo</th>
-        <th>Traducción</th>
-      </tr>
+<table>
 
-      <tr *ngFor="let item of temaSeleccionado.tabla">
+  <tr>
+    <th>Pronombre</th>
+    <th>Verbo</th>
+    <th>Traducción</th>
+  </tr>
 
-        <td>{{ item.pronombre }}</td>
-        <td>{{ item.verbo }}</td>
-        <td>{{ item.traduccion }}</td>
+  <tr *ngFor="let item of temaSeleccionado.tabla">
 
-      </tr>
+    <td>{{ item.pronombre }}</td>
+    <td>{{ item.verbo }}</td>
+    <td>{{ item.traduccion }}</td>
 
-    </table>
+  </tr>
+
+</table>
+
+}
 
     <!-- EJEMPLOS -->
-    <ul *ngIf="temaSeleccionado.tipo === 'ejemplos'">
+@if (temaSeleccionado.ejemplos) {
 
-      <li *ngFor="let ejemplo of temaSeleccionado.ejemplos">
-        {{ ejemplo }}
-      </li>
+<ul>
 
-    </ul>
+  <li *ngFor="let ejemplo of temaSeleccionado.ejemplos">
+    {{ ejemplo }}
+  </li>
+
+</ul>
+
+}
 
     <!-- VOCABULARIO -->
-    <ul *ngIf="temaSeleccionado.vocabulario">
+@if (temaSeleccionado.vocabulario) {
 
-      <li *ngFor="let palabra of temaSeleccionado.vocabulario">
-        {{ palabra }}
-      </li>
+<ul>
 
-    </ul>
+  <li *ngFor="let palabra of temaSeleccionado.vocabulario">
+    {{ palabra }}
+  </li>
+
+</ul>
+
+}
 
   </div>
 
