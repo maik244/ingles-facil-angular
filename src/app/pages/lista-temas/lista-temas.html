@@ -1,9 +1,6 @@
 ```html
-<!-- lista-temas.html -->
-
 <div class="layout">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
 
     <div class="logo">
@@ -16,10 +13,12 @@
       Selecciona un tema para aprender
     </p>
 
-    <div class="tema-card"
-        [class.activo]="temaSeleccionado?.id === tema.id"
-       *ngFor="let tema of temas"
-        (click)="verDetalle(tema)">
+    <div
+      class="tema-card"
+      *ngFor="let tema of temas"
+      [class.activo]="temaSeleccionado?.id === tema.id"
+      (click)="verDetalle(tema)"
+    >
 
       <span class="numero">
         {{ tema.id + 1 }}
@@ -33,65 +32,54 @@
 
   </aside>
 
-  <!-- CONTENIDO -->
   <main class="contenido">
 
     <div class="detalle-card" *ngIf="temaSeleccionado">
 
-      <h1>{{ temaSeleccionado.nombre }}</h1>
+      <h1>
+        {{ temaSeleccionado.nombre }}
+      </h1>
 
       <p class="explicacion">
         {{ temaSeleccionado.explicacion }}
       </p>
 
       <!-- TABLA -->
-      <div *ngIf="temaSeleccionado.tabla?.length">
+      <table *ngIf="temaSeleccionado.tabla">
 
-        <table>
+        <tr>
+          <th>Pronombre</th>
+          <th>Verbo</th>
+          <th>Traducción</th>
+        </tr>
 
-          <tr>
-            <th>Pronombre</th>
-            <th>Verbo</th>
-            <th>Traducción</th>
-          </tr>
+        <tr *ngFor="let item of temaSeleccionado.tabla">
 
-          <tr *ngFor="let item of temaSeleccionado.tabla">
+          <td>{{ item.pronombre }}</td>
+          <td>{{ item.verbo }}</td>
+          <td>{{ item.traduccion }}</td>
 
-            <td>{{ item.pronombre }}</td>
-            <td>{{ item.verbo }}</td>
-            <td>{{ item.traduccion }}</td>
+        </tr>
 
-          </tr>
-
-        </table>
-
-      </div>
+      </table>
 
       <!-- EJEMPLOS -->
-      <div *ngIf="temaSeleccionado.ejemplos?.length">
+      <ul *ngIf="temaSeleccionado.ejemplos">
 
-        <ul>
+        <li *ngFor="let ejemplo of temaSeleccionado.ejemplos">
+          {{ ejemplo }}
+        </li>
 
-          <li *ngFor="let ejemplo of temaSeleccionado.ejemplos">
-            {{ ejemplo }}
-          </li>
-
-        </ul>
-
-      </div>
+      </ul>
 
       <!-- VOCABULARIO -->
-      <div *ngIf="temaSeleccionado.vocabulario?.length">
+      <ul *ngIf="temaSeleccionado.vocabulario">
 
-        <ul>
+        <li *ngFor="let palabra of temaSeleccionado.vocabulario">
+          {{ palabra }}
+        </li>
 
-          <li *ngFor="let palabra of temaSeleccionado.vocabulario">
-            {{ palabra }}
-          </li>
-
-        </ul>
-
-      </div>
+      </ul>
 
     </div>
 
