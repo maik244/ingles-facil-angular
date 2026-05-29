@@ -1,35 +1,40 @@
-import { Component,OnInit } from '@angular/core';
+
+
+import { Component, OnInit } from '@angular/core';
 import { TemaService } from '../../services/tema';
 import { Tema } from '../../models/tema';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-lista-temas',
   imports: [CommonModule],
   templateUrl: './lista-temas.html',
-  styleUrl: './lista-temas.css',
+  styleUrls: ['./lista-temas.css'],
 })
-export class ListaTemas {
+export class ListaTemas implements OnInit {
 
   temas: Tema[] = [];
   temaSeleccionado?: Tema;
-  constructor(
-    private temaService: TemaService,
 
+  constructor(
+    private temaService: TemaService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+
     this.temas = this.temaService.getTemas();
 
-    this.temaSeleccionado = this.temas[0];
+    // nueva referencia
+    this.temaSeleccionado = { ...this.temas[0] };
+
   }
 
-  verDetalle(tema: Tema) {
-  this.temaSeleccionado = tema;
+  verDetalle(tema: Tema): void {
+
+    // nueva referencia
+    this.temaSeleccionado = { ...tema };
+
   }
-  
-  trackByTema(index: number, tema: Tema): number {
-  return tema.id;
+
 }
-}
+
